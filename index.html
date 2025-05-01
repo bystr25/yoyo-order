@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .product-image {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+        .product-description {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Produk</h1>
+        
+        <!-- Gambar Produk -->
+        <img src="https://i.ibb.co.com/5W6Rr5Kk/yoyo.jpg" alt="Gambar Produk" class="product-image">
+
+        <!-- Deskripsi Produk -->
+        <div class="product-description">
+            <p>Gambar yang ditampilkan hanyalah ilustrasi untuk gambar produk yang asli dapat meminta melalui WhatsApp dengan cara</p>
+        </div>
+        <div>
+            <p>*Isi formulir order terlebih dahulu</p>
+            <p>*Tekan tombol Order untuk melanjutkan order ke WhatsApp</p>
+            <p>*Kirim formulir</p>
+            <p>*Jika ada yang ingin ditanyakan silahkan kirim pertanyaan juga setelah mengirim formulir</p>
+            <p>*Untuk pemesanan dengan jumlah yang besar di harapkan untuk melakukan DP 10% dari harga total produk terlebih dahulu</p>
+        </div>
+
+        <!-- Input Jumlah Produk -->
+        <label for="quantity">Jumlah Produk (Minimal 1)</label>
+        <input type="number" id="quantity" min="1" placeholder="Masukkan jumlah produk" oninput="calculateTotal()">
+        
+        <!-- Total Harga -->
+        <div class="result">
+            Total Harga: <span id="total">0</span> IDR
+        </div>
+
+        <!-- Tombol Order -->
+        <a id="orderButton" href="#" class="btn" target="_blank">Pesan Sekarang</a>
+    </div>
+
+    <script>
+        const hargaPerProduk = 20000; // Harga untuk 1 produk
+        const namaProduk = "Produk Sample"; // Ganti dengan nama produk yang diinginkan
+
+        function calculateTotal() {
+            const quantity = document.getElementById('quantity').value;
+            let totalHarga = 0;
+
+            // Menghitung total harga berdasarkan jumlah produk
+            if (quantity >= 1) {
+                totalHarga = quantity * hargaPerProduk;
+            }
+
+            // Menampilkan total harga di halaman
+            document.getElementById('total').textContent = totalHarga.toLocaleString();
+
+            // Update link tombol order untuk WhatsApp
+            const waText = `Saya mau order\nNama Produk: YOYO\nJumlah: ${quantity}\nTotal Harga: Rp${totalHarga.toLocaleString()}`;
+            const waLink = `https://wa.me/6288291837303?text=${encodeURIComponent(waText)}`;
+            document.getElementById('orderButton').setAttribute('href', waLink);
+        }
+    </script>
+</body>
+</html>
